@@ -24,10 +24,11 @@ yearP1 <- url1 %>%
   str_extract("\\(([0-9]{4})\\)",group = 1) %>%
   as.numeric()
 
-#rateP1 <- url1 %>%
-#  read_html() %>%
-#  html_elements("span.certificate") %>%
-#  html_text2()
+rateP1 <- url1 %>%
+  read_html() %>%
+  html_elements("div.lister-item-content") %>%
+  html_text2() %>%
+  str_extract("(.+) \\| [0-9]+ min", group = 1)
 
 runtimeP1 <- url1 %>%
   read_html() %>%
@@ -102,10 +103,11 @@ yearP2 <- url2 %>%
   str_extract("\\(([0-9]{4})\\)",group = 1) %>%
   as.numeric()
 
-#rateP2 <- url2 %>%
-#  read_html() %>%
-#  html_elements("span.certificate") %>%
-#  html_text2()
+rateP2 <- url2 %>%
+  read_html() %>%
+  html_elements("div.lister-item-content") %>%
+  html_text2() %>%
+  str_extract("(.+) \\| [0-9]+ min", group = 1)
 
 runtimeP2 <- url2 %>%
   read_html() %>%
@@ -161,14 +163,15 @@ grossP2 <- url2 %>%
 imdb_df <- data.frame(rank=c(rankP1, rankP2),
                   name=c(nameP1, nameP2),
                   year=c(yearP1, yearP2),
-#                  rate=c(rateP1, rateP2),
+                  rate=c(rateP1, rateP2),
                   runtime=c(runtimeP1, runtimeP2),
                   genre=c(genreP1, genreP2),
                   scores=c(scoresP1, scoresP2),
                   director=c(directorP1, directorP2),
                   stars=c(starsP1, starsP2),
                   votes=c(votesP1, votesP2),
-                  gross=c(grossP1, grossP2)
+                  gross_m_dollar=c(grossP1, grossP2)
                   )
 
+View(imdb_df)
 
