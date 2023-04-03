@@ -307,7 +307,7 @@ WHERE last_name like("%Uzumaki")
 
 ------------------------------------------------------------------
 
---- Amount of order per city ---
+--- amount of order per city ---
 
 SELECT
 	city,
