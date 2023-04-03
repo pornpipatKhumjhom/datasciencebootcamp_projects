@@ -1,0 +1,320 @@
+/*
+
+--- creat database ---
+
+CREATE TABLE menus (
+  menu_id INT UNIQUE NOT NULL,
+  menu_name TEXT UNIQUE NOT NULL,
+  price INT NOT NULL,
+  type TEXT NOT NULL,
+  PRIMARY KEY (menu_id)
+);
+
+INSERT INTO menus VALUES 
+	(186, "Buta-No-Shogayaki (Ginger Pork)", 420, "food"),
+	(274, "Champon", 519, "food"),
+	(311, "Edamame", 399, "food"),
+	(440, "Fugu", 359, "food"),
+	(541, "Gyoza", 199, "food"),
+	(612, "Gyudon", 650, "food"),
+	(702, "Gyukatsu (Beef cutlet)", 635, "food"),
+	(881, "Gyutan", 279, "food"),
+	(953, "Karaage", 129, "food"),
+	(183, "Katsudon", 529, "food"),
+	(178, "Kushikatsu", 419, "food"),
+	(241, "Miso Soup", 159, "food"),
+	(315, "Nabe", 220, "food"),
+	(482, "Natto", 349, "food"),
+	(116, "Oden", 179, "food"),
+	(159, "Okonomiyaki", 429, "food"),
+	(744, "Omuraisu", 639, "food"),
+	(182, "Onigiri", 220, "food"),
+	(951, "Ramen", 480, "food"),
+	(256, "Robatayaki", 439, "food"),
+	(218, "Soba", 520, "food"),
+	(812, "Somen", 630, "food"),
+	(253, "Sushi and sashimi", 490, "food"),
+	(924, "Takowasa", 329, "food"),
+	(785, "Tempura", 280, "food"),
+	(426, "Teppanyaki", 320, "food"),
+	(717, "Tonkatsu", 450, "food"),
+	(128, "Udon", 550, "food"),
+	(296, "Yakiniku", 580, "food"),
+	(305, "Yakisoba", 520, "food"),
+	(831, "Yakitori", 480, "food"),
+	(937, "Yakizakana", 329, "food"),
+	(505, "Pepsi", 89, "drink"),
+	(506, "Coke", 95, "drink"),
+	(508, "Oishi", 65, "drink"),
+	(509, "Fanta", 75, "drink"),
+	(510, "Mirinda", 70, "drink"),
+	(515, "Water", 50, "drink");
+
+	
+CREATE TABLE staffs (
+	staff_id INT UNIQUE NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	department TEXT NOT NULL,
+	PRIMARY KEY (staff_id)
+	);
+	
+INSERT INTO staffs VALUES
+	(1111, "Naruto", "Uzumaki", "delivery"),
+	(1112, "Sasuke",  "Uchiha", "kitchen"),
+	(1113, "Sakura", "Haruno", "floor"),
+	(1114, "Kakashi", "Hatake", "manager"),
+	(1115, "Boruto", "Uzumaki", "delivery"),
+	(1116, "Sarada", "Uchiha", "floor"),
+	(1117, "Konohamaru", "Sarutobi", "kitchen"),
+	(1118, "Shikamaru", "Nara", "kitchen"),
+	(1119, "Rock", "Lee", "floor"),
+	(1120, "Neji", "Hyuga", "kitchen");
+
+	
+CREATE TABLE customers (
+	customers_id INT UNIQUE NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	PRIMARY KEY (customers_id)
+	);
+
+INSERT INTO customers VALUES
+	(11111, "John", "Wick"),
+	(12547, "Dominic", "Toretto"),
+	(14257, "Tony", "Stark"),
+	(12415, "Steve", "Roger"),
+	(13217, "Harry", "Potter"),
+	(17812, "Bruce", "Wayne"),
+	(15216, "Eren", "Yeager"),
+	(14215, "Scott", "Lang"),
+	(16249, "Nick", "Fury"),
+	(19821, "Natacha", "Romanoff"),
+	(15124, "Barry", "Allen"),
+	(17842, "Yagami", "Light"),
+	(16859, "Kurosaki", "Ichigo"),
+	(15674, "Son", "Goku"),
+	(15741, "Kujo", "Jotaro"),
+	(16588, "Jonathan", "Joestar"),
+	(19585, "Dio", "Brando"),
+	(19557, "Giorno", "Giorvana"),
+	(18517, "Kichibe", "Rohan"),
+	(17412, "Kuroba", "Kaito"),
+	(13265, "Killua", "Soldyk"),
+	(11992, "Yugi", "Jordan"),
+	(14259, "Muto", "Yugi");
+
+	
+CREATE TABLE delivery_address (
+	delivery_address_id INT UNIQUE NOT NULL,
+	city TEXT NOT NULL,
+	PRIMARY KEY (delivery_address_id)
+	);
+
+INSERT INTO delivery_address VALUES
+	(1, "Bangkok"),
+	(2, "Nonthaburi"),
+	(3, "Samut-Prakarn"),
+	(4, "Lop-Buri"),
+	(5, "Supharn-Buri");
+
+	
+CREATE TABLE orders (
+	order_id INT UNIQUE NOT NULL,
+	customers_id INT NOT NULL,
+	menu_id INT NOT NULL,
+	yyyy_mm_dd TEXT NOT NULL,
+	quantity INT NOT NULL,
+	delivery_address_id INT,
+	PRIMARY KEY (order_id)
+	);
+
+INSERT INTO orders VALUES
+	(110011, 11111, 186, "2023-04-01", 1, NULL),
+	(110012, 11111, 702, "2023-04-01", 2, NULL),
+	(110013, 11111, 951, "2023-04-01", 1, NULL),
+	(110014, 11111, 186, "2023-04-01", 1, NULL),
+	(110015, 12547, 744, "2023-04-01", 1, 3),
+	(110016, 12547, 482, "2023-04-01", 2, 3),
+	(110017, 14257, 482, "2023-04-01", 1, 2),
+	(110018, 12547, 253, "2023-04-02", 1, 3),
+	(110019, 12547, 505, "2023-04-02", 2, 3),	
+	(110020, 12415, 951, "2023-04-02", 1, NULL),
+	(110021, 12415, 702, "2023-04-02", 1, NULL),
+	(110022, 13217, 182, "2023-04-02", 1, 1),
+	(110023, 13217, 924, "2023-04-02", 1, 1),
+	(110024, 17812, 881, "2023-04-03", 2, 5),
+	(110025, 17812, 116, "2023-04-03", 1, 5),
+	(110026, 17812, 311, "2023-04-03", 1, 5),
+	(110027, 19557, 744, "2023-04-03", 1, 2),
+	(110028, 11992, 159, "2023-04-03", 2, 1),
+	(110029, 11992, 253, "2023-04-03", 1, 1),
+	(110030, 13217, 182, "2023-04-04", 1, NULL),
+	(110031, 17842, 256, "2023-04-04", 1, NULL),
+	(110032, 14259, 315, "2023-04-04", 1, 4),
+	(110033, 14259, 183, "2023-04-04", 1, 4),
+	(110034, 17812, 116, "2023-04-04", 1, 5),
+	(110035, 17812, 218, "2023-04-04", 2, 5),
+	(110036, 15216, 812, "2023-04-05", 1, NULL),
+	(110037, 15216, 296, "2023-04-05", 1, NULL),
+	(110038, 15216, 183, "2023-04-05", 1, NULL),
+	(110039, 15216, 717, "2023-04-05", 1, NULL),
+	(110040, 16588, 744, "2023-04-05", 1, 2),
+	(110041, 14215, 785, "2023-04-05", 1, 2),
+	(110042, 16249, 951, "2023-04-05", 2, NULL),
+	(110043, 16249, 881, "2023-04-05", 1, NULL),
+	(110044, 11111, 186, "2023-04-05", 1, NULL),
+	(110045, 19821, 159, "2023-04-06", 1, 4), 
+	(110046, 16249, 702, "2023-04-06", 1, NULL),
+	(110047, 14215, 612, "2023-04-06", 1, 2),
+	(110048, 12415, 702, "2023-04-06", 1, 2),
+	(110049, 12415, 924, "2023-04-06", 1, 2),
+	(110050, 17842, 182, "2023-04-07", 1, NULL),
+	(110051, 16859, 159, "2023-04-07", 1, 3),
+	(110052, 15674, 426, "2023-04-07", 2, 2),
+	(110053, 15741, 183, "2023-04-07", 1, 5),
+	(110054, 14259, 315, "2023-04-08", 1, 4),
+	(110055, 14259, 924, "2023-04-08", 1, 4),
+	(110056, 12547, 744, "2023-04-08", 1, 3),
+	(110057, 16588, 274, "2023-04-08", 2, 2),
+	(110058, 17812, 241, "2023-04-09", 2, 5),
+	(110059, 14257, 482, "2023-04-09", 1, 2),
+	(110060, 19585, 315, "2023-04-09", 1, 1),
+	(110061, 19557, 178, "2023-04-09", 2, NULL),
+	(110062, 19557, 510, "2023-04-09", 1, NULL),
+	(110063, 18517, 116, "2023-04-09", 1, 1),
+	(110064, 14259, 183, "2023-04-09", 1, 4),
+	(110065, 17412, 256, "2023-04-10", 1, 2),
+	(110066, 17412, 506, "2023-04-10", 1, 2),
+	(110067, 13265, 183, "2023-04-10", 2, NULL),
+	(110068, 14259, 183, "2023-04-10", 1, 4),
+	(110069, 16588, 218, "2023-04-11", 1, NULL),
+	(110070, 16859, 953, "2023-04-11", 1, 3),
+	(110071, 11111, 440, "2023-04-11", 1, NULL),
+	(110072, 12547, 951, "2023-04-12", 1, 3),
+	(110073, 17812, 426, "2023-04-13", 1, 5),
+	(110074, 12547, 831, "2023-04-13", 1, 3),
+	(110075, 12415, 717, "2023-04-14", 1, 2),
+	(110076, 12415, 702, "2023-04-14", 1, 2),
+	(110077, 16249, 702, "2023-04-14", 1, NULL),
+	(110078, 17412, 506, "2023-04-15", 1, 2),
+	(110079, 17812, 241, "2023-04-15", 2, 5),
+	(110080, 14257, 717, "2023-04-15", 1, 2),
+	(110081, 14257, 515, "2023-04-15", 1, 2),
+	(110082, 14257, 482, "2023-04-16", 1, NULL),
+	(110083, 14257, 440, "2023-04-16", 2, 2),
+	(110084, 15674, 315, "2023-04-17", 1, 2),
+	(110085, 15674, 426, "2023-04-18", 1, 2),
+	(110086, 17812, 702, "2023-04-19", 1, 5),
+	(110087, 14259, 116, "2023-04-19", 1, 4),
+	(110088, 14257, 482, "2023-04-25", 2, 2),
+	(110089, 16588, 717, "2023-04-25", 1, 2),
+	(110090, 16588, 509, "2023-04-25", 2, 2),
+	(110091, 13217, 182, "2023-04-25", 1, NULL),
+	(110092, 11992, 440, "2023-04-26", 1, 1),
+	(110093, 13265, 296, "2023-04-26", 2, NULL),
+	(110094, 11992, 253, "2023-04-26", 1, 1),
+	(110095, 17812, 426, "2023-04-27", 1, 5),
+	(110096, 12547, 831, "2023-04-28", 1, 3),
+	(110097, 17412, 937, "2023-04-29", 1, NULL),
+	(110098, 12415, 717, "2023-04-30", 1, 2),
+	(110099, 14259, 744, "2023-04-30", 1, 4),
+	(110100, 17842, 182, "2023-04-30", 2, NULL),
+	(110101, 15124, 253, "2023-04-30", 1,1);
+*/
+
+---------------------------------------------------------------
+
+--- What menu does each customer order? ---
+--- Number of orders per customer? ---
+
+WITH full_orders as (
+	SELECT *
+	FROM orders as ord
+	LEFT JOIN customers as cus on ord.customers_id = cus.customers_id
+	LEFT JOIN menus on ord.menu_id = menus.menu_id
+	LEFT JOIN delivery_address as deli on deli.delivery_address_id = ord.delivery_address_id
+)
+
+SELECT
+	row_number() OVER(PARTITION by cus_name ORDER by price DESC) as frequency,
+	cus_name,
+	menu_name,
+	type,
+	price
+FROM (
+	SELECT
+		first_name || " " || last_name as cus_name,
+		menu_name,
+		type,
+		price
+	FROM full_orders
+);
+-------------------------------------------------------------------
+
+--- top5 customers who spend the most money between 1st april and 15th april ---
+
+WITH full_orders as (
+	SELECT *
+	FROM orders as ord
+	LEFT JOIN customers as cus on ord.customers_id = cus.customers_id
+	LEFT JOIN menus on ord.menu_id = menus.menu_id
+	LEFT JOIN delivery_address as deli on deli.delivery_address_id = ord.delivery_address_id
+)
+
+SELECT
+	first_name || " " || last_name as cus_name,
+	sum(price)
+FROM full_orders
+WHERE CAST(strftime("%d", yyyy_mm_dd) as INT) BETWEEN 1 and 15
+GROUP by 1
+ORDER by 2 DESC
+LIMIT 5;
+
+-------------------------------------------------------------------
+
+--- which orders are delivery order or not delivery order ---
+--- and menu is "Oden", "Oigiri", "Gyukatsu (Beef cutlet)", "Nabe", "Ramen", "Teppanyaki" ---
+
+WITH full_orders as (
+	SELECT *
+	FROM orders as ord
+	LEFT JOIN customers as cus on ord.customers_id = cus.customers_id
+	LEFT JOIN menus on ord.menu_id = menus.menu_id
+	LEFT JOIN delivery_address as deli on deli.delivery_address_id = ord.delivery_address_id
+)
+
+SELECT
+	first_name || " " || last_name as cus_name,
+	menu_name,
+	yyyy_mm_dd,
+	CASE WHEN delivery_address_id is NOT NULL THEN "delivery"
+		 ELSE "not delivery"
+		 END as deli_status
+FROM full_orders
+WHERE menu_name in ("Oden", "Oigiri", "Gyukatsu (Beef cutlet)", "Nabe", "Ramen", "Teppanyaki")
+ORDER by 3;
+
+-------------------------------------------------------------------
+
+--- staffs who the lastname is "Uzumaki" ---
+
+SELECT
+	first_name || " " || last_name as staff_name,
+	department
+FROM staffs
+WHERE last_name like("%Uzumaki")
+
+------------------------------------------------------------------
+
+--- Amount of order per city ---
+
+SELECT
+	city,
+	count(city) as num_of_time
+FROM orders
+JOIN delivery_address as deli_add on orders.delivery_address_id = deli_add.delivery_address_id
+GROUP by 1
+ORDER by 2 DESC;
+
+-------------------------------------------------------------------
